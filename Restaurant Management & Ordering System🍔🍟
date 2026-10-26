@@ -1,0 +1,117 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string items[6] = {
+        "Burger",
+        "Pizza",
+        "Pasta",
+        "Chicken",
+        "French Fries",
+        "Cola"
+    };
+
+    double prices[6] = {
+        120,
+        180,
+        150,
+        200,
+        60,
+        30
+    };
+
+    int quantities[6] = {0};
+
+    int choice;
+    int quantity;
+    double total = 0;
+    double discount = 0;
+
+    cout << "=====================================\n";
+    cout << "       WELCOME TO OUR RESTAURANT\n";
+    cout << "=====================================\n";
+
+    do
+    {
+        cout << "\n------------ MENU ------------\n";
+
+        for (int i = 0; i < 6; i++)
+        {
+            cout << i + 1 << ". "
+                 << items[i]
+                 << " - "
+                 << prices[i]
+                 << " EGP\n";
+        }
+
+        cout << "7. Checkout\n";
+        cout << "8. Exit\n";
+
+        cout << "\nChoose an item: ";
+        cin >> choice;
+
+        if (choice >= 1 && choice <= 6)
+        {
+            cout << "Enter quantity: ";
+            cin >> quantity;
+
+            quantities[choice - 1] += quantity;
+
+            cout << "Item added successfully!\n";
+        }
+        else if (choice == 7)
+        {
+            total = 0;
+
+            for (int i = 0; i < 6; i++)
+            {
+                total += prices[i] * quantities[i];
+            }
+
+            if (total >= 500)
+            {
+                discount = total * 0.10;
+            }
+            else
+            {
+                discount = 0;
+            }
+
+            cout << "\n=====================================\n";
+            cout << "              RECEIPT\n";
+            cout << "=====================================\n";
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (quantities[i] > 0)
+                {
+                    cout << items[i]
+                         << " x "
+                         << quantities[i]
+                         << " = "
+                         << prices[i] * quantities[i]
+                         << " EGP\n";
+                }
+            }
+
+            cout << "-------------------------------------\n";
+            cout << "Subtotal: " << total << " EGP\n";
+            cout << "Discount: " << discount << " EGP\n";
+            cout << "Total: " << total - discount << " EGP\n";
+            cout << "=====================================\n";
+        }
+        else if (choice == 8)
+        {
+            cout << "\nThank you for visiting us!\n";
+        }
+        else
+        {
+            cout << "\nInvalid choice. Try again.\n";
+        }
+
+    } while (choice != 8);
+
+    return 0;
+}
